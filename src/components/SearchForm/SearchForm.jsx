@@ -1,14 +1,23 @@
+import { useContext } from 'react'
+import { FilmsContext, fetchFilmsData, isLoadingFilmsData } from './../../store'
 import Input from './../Input'
 import Button from './../Button'
+import omdbService from './../../services/omdb'
 import { useInput } from './../../hooks'
 
 const SearchForm = ({ onSubmit }) => {
+  const { filmsDataDispatch } = useContext(FilmsContext)
   const [searchedFilm, setSearchedFilm] = useInput('')
   
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
 
-    onSubmit(searchedFilm)
+    filmsDataDispatch(isLoadingFilmsData(true))
+
+    const filmsData = await omdbService().fetchFilms(searchedFilm)
+
+    filmsDataDispatch(isLoadingFilmsData(false))
+    filmsDataDispatch(fetchFilmsData(filmsData))
   }
   
   return (

@@ -16,7 +16,9 @@ function omdbService() {
         Search: nonRepeatedFilms
       }
     } catch(error) {
-      console.error('[ERROR] Could not fetch OMDB films')
+      return {
+        Response: "False"
+      }
     }
   }
 
