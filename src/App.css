@@ -86,3 +86,13 @@ button {
 .search-item .search-item-data .meta {
   font-size: 14px;
 }
+
+.no-results {
+  background-color: #ffffffbb;
+  width: 50%;
+  margin: auto;
+  margin-top: 1rem;
+  padding: 1rem;
+  border-radius: 3px;
+  border-left: 4px solid cornflowerblue;
+}
