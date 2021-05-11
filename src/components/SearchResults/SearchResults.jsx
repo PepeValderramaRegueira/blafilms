@@ -3,6 +3,7 @@ import { FilmsContext } from './../../store'
 import Chevron from './../Chevron'
 import Movies from './../Movies'
 import Loader from './../Loader'
+import Message from './../Message'
 import { calculateTotalPages, getPagination } from './../../utils'
 
 const SearchResults = () => {
@@ -11,7 +12,7 @@ const SearchResults = () => {
   const noResultsYet = filmsData.Response === "False"
 
   if (isLoading) return <Loader />
-  if (noResultsYet) return <p>No results yet</p>
+  if (noResultsYet) return <Message message="No results yet"/>
 
   const { currentPage, totalResults } = filmsData
   const totalPages = calculateTotalPages(totalResults)
