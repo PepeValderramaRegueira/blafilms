@@ -1,5 +1,5 @@
-const Button = ({ type = 'submit', label = '' }) => (
-  <button type={type}>
+const Button = ({ type = 'submit', label = '', disabled }) => (
+  <button type={type} disabled={disabled}>
     {label}
   </button>
 )

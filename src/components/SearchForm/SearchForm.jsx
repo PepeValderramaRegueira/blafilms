@@ -5,9 +5,10 @@ import Button from './../Button'
 import omdbService from './../../services/omdb'
 import { useInput } from './../../hooks'
 
-const SearchForm = ({ onSubmit }) => {
-  const { filmsDataDispatch } = useContext(FilmsContext)
+const SearchForm = () => {
+  const { filmsData, filmsDataDispatch } = useContext(FilmsContext)
   const [searchedFilm, setSearchedFilm] = useInput('')
+  const { isLoading } = filmsData
   
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -27,8 +28,9 @@ const SearchForm = ({ onSubmit }) => {
         value={searchedFilm}
         onChange={setSearchedFilm}
         placeholder="Search..."
+        disabled={isLoading}
       />
-      <Button label='Search' />
+      <Button label='Search' disabled={isLoading} />
     </form>
   )
 }
