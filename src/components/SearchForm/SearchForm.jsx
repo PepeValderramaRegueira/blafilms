@@ -1,24 +1,18 @@
 import { useContext } from 'react'
-import { FilmsContext, fetchFilmsData, isLoadingFilmsData } from './../../store'
+import { FilmsContext, resetPage } from './../../store'
 import Input from './../Input'
 import Button from './../Button'
-import omdbService from './../../services/omdb'
 import { useInput } from './../../hooks'
+import { withFetch } from './../../hoc'
 
-const SearchForm = () => {
-  const { filmsData, filmsDataDispatch } = useContext(FilmsContext)
+const SearchForm = ({ fetchApi }) => {
+  const { filmsData } = useContext(FilmsContext)
   const [searchedFilm, setSearchedFilm] = useInput('')
-  const { isLoading, currentPage } = filmsData
+  const { isLoading } = filmsData
   
   const handleSubmit = async (e) => {
     e.preventDefault()
-
-    filmsDataDispatch(isLoadingFilmsData(true))
-    
-    const filmsData = await omdbService().fetchFilms(searchedFilm, 1)
-
-    filmsDataDispatch(isLoadingFilmsData(false))
-    filmsDataDispatch(fetchFilmsData(filmsData))
+		fetchApi(searchedFilm, 1, resetPage)
   }
   
   return (
@@ -35,4 +29,4 @@ const SearchForm = () => {
   )
 }
 
-export default SearchForm
+export default withFetch(SearchForm)

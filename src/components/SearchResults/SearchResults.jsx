@@ -1,12 +1,13 @@
 import { useContext } from 'react'
-import { FilmsContext } from './../../store'
+import { FilmsContext, incrementPage, decrementPage } from './../../store'
 import Chevron from './../Chevron'
 import Movies from './../Movies'
 import Loader from './../Loader'
 import Message from './../Message'
 import { calculateTotalPages, getPagination } from './../../utils'
+import { withFetch } from './../../hoc'
 
-const SearchResults = () => {
+const SearchResults = ({ fetchApi }) => {
   const { filmsData } = useContext(FilmsContext)
   const { isLoading } = filmsData
   const noResultsYet = filmsData.Response === "False"
@@ -16,17 +17,30 @@ const SearchResults = () => {
 
   const { currentPage, totalResults } = filmsData
   const totalPages = calculateTotalPages(totalResults)
-  const { previousPage, lastPage } = getPagination(currentPage, totalPages)
-  console.log('currentPage', currentPage)
-  console.log('currentPage < totalPages', currentPage === totalPages)
+  const { previousPage, nextPage } = getPagination(currentPage, totalPages)
+
+	const fetchNextFilms = (pageAction, page) => {
+		fetchApi('text', page, pageAction)
+	}
+
+	const prevPageIsDisabled = currentPage === 1
+	const nextPageIsDisabled = currentPage === totalPages
   
   return (
     <div className="search-results">
-      <Chevron direction='left' isDisabled={currentPage === 1} />
+      <Chevron
+				direction='left'
+				isDisabled={prevPageIsDisabled}
+				onClick={!prevPageIsDisabled ? () => fetchNextFilms(decrementPage, previousPage) : null}
+			/>
       <Movies moviesList={filmsData.Search} />
-      <Chevron direction='right' isDisabled={currentPage === totalPages} />
+      <Chevron 
+				direction='right'
+				isDisabled={nextPageIsDisabled}
+				onClick={!nextPageIsDisabled ? () => fetchNextFilms(incrementPage, nextPage) : null}
+			/>
     </div>
   )
 }
 
-export default SearchResults
+export default withFetch(SearchResults)
