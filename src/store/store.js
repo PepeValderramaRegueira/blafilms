@@ -7,7 +7,7 @@ const initialState = {
   isLoading: false,
   totalResults: '',
   currentPage: 0,
-	currentSearch: 'hobbit'
+	currentSearch: ''
 }
 
 const FilmsContext = createContext(initialState)

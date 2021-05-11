@@ -1,4 +1,4 @@
-import { PAGE_SIZE } from './get-pagination'
+const PAGE_SIZE = 10
 
 function calculateTotalPages(totalResults, pageSize = PAGE_SIZE) {
   const lastPageRest = totalResults % pageSize !== 0 ? 1 : 0

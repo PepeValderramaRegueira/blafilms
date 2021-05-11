@@ -1,26 +1,26 @@
-import { useContext } from 'react'
-import { FilmsContext, resetPage } from './../../store'
+import { useContext, useState } from 'react'
+import { FilmsContext, resetPage, updateCurrentSearch } from './../../store'
 import Input from './../Input'
 import Button from './../Button'
-import { useInput } from './../../hooks'
 import { withFetch } from './../../hoc'
 
 const SearchForm = ({ fetchApi }) => {
-  const { filmsData } = useContext(FilmsContext)
-  const [searchedFilm, setSearchedFilm] = useInput('')
-  const { isLoading } = filmsData
+  const { filmsData, filmsDataDispatch } = useContext(FilmsContext)
+  const { isLoading, currentSearch } = filmsData
   
   const handleSubmit = async (e) => {
     e.preventDefault()
-		fetchApi(searchedFilm, 1, resetPage)
+		fetchApi(currentSearch, 1, resetPage)
   }
+
+	const handleSearchedFilmChange = (e) => filmsDataDispatch(updateCurrentSearch(e.target.value))
   
   return (
     <form className="search" onSubmit={handleSubmit}>
       <Input
         type="text"
-        value={searchedFilm}
-        onChange={setSearchedFilm}
+        value={currentSearch}
+        onChange={handleSearchedFilmChange}
         placeholder="Search..."
         disabled={isLoading}
       />

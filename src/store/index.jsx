@@ -5,7 +5,8 @@ import {
 	isLoadingFilmsData,
 	incrementPage,
 	decrementPage,
-	resetPage
+	resetPage,
+	updateCurrentSearch
 } from './actions'
 
 export default FilmsProvider
@@ -16,5 +17,6 @@ export {
   isLoadingFilmsData,
 	incrementPage,
 	decrementPage,
-	resetPage
+	resetPage,
+	updateCurrentSearch
 }

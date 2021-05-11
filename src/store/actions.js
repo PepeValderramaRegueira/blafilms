@@ -3,6 +3,7 @@ export const IS_LOADING_FILMS_DATA = 'IS_LOADING_FILMS_DATA'
 export const INCREMENT_PAGE = 'INCREMENT_PAGE'
 export const DECREMENT_PAGE = 'DECREMENT_PAGE'
 export const RESET_PAGE = 'RESET_PAGE'
+export const UPDATE_CURRENT_SEARCH = 'UPDATE_CURRENT_SEARCH'
 
 export const fetchFilmsData = (filmsData) => ({
   type: FETCH_FILMS_DATA,
@@ -28,4 +29,11 @@ export const decrementPage = () => ({
 
 export const resetPage = () => ({
 	type: RESET_PAGE
+})
+
+export const updateCurrentSearch = (newSearch) => ({
+	type: UPDATE_CURRENT_SEARCH,
+	payload: {
+		newSearch
+	}
 })

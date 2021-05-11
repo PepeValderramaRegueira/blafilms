@@ -3,7 +3,8 @@ import {
 	IS_LOADING_FILMS_DATA,
 	INCREMENT_PAGE,
 	DECREMENT_PAGE,
-	RESET_PAGE
+	RESET_PAGE,
+	UPDATE_CURRENT_SEARCH
 } from './actions'
 import { initialState } from './store'
 
@@ -30,6 +31,11 @@ function filmsReducer(state = initialState, action) {
 			return {
 				...state,
 				currentPage: 1
+			}
+		case UPDATE_CURRENT_SEARCH:
+			return {
+				...state,
+				currentSearch: action.payload.newSearch
 			}
     default:
       return {
