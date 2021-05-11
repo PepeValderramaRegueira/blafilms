@@ -3,6 +3,8 @@ import { deleteDuplicated } from "../utils/delete-duplicated"
 const OMDB_API_KEY = 'a461e386'
 const OMDB_BASE_URL = `http://www.omdbapi.com/?apikey=${OMDB_API_KEY}`
 
+export const PAGE_SIZE = 10
+
 function omdbService() {
   async function fetchFilms(keyword, page = 1) {
     try {
@@ -13,6 +15,7 @@ function omdbService() {
 
       return {
         ...parsedResponse,
+        totalResults: parseInt(parsedResponse.totalResults),
         Search: nonRepeatedFilms
       }
     } catch(error) {

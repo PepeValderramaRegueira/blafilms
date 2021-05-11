@@ -8,14 +8,14 @@ import { useInput } from './../../hooks'
 const SearchForm = () => {
   const { filmsData, filmsDataDispatch } = useContext(FilmsContext)
   const [searchedFilm, setSearchedFilm] = useInput('')
-  const { isLoading } = filmsData
+  const { isLoading, currentPage } = filmsData
   
   const handleSubmit = async (e) => {
     e.preventDefault()
 
     filmsDataDispatch(isLoadingFilmsData(true))
-
-    const filmsData = await omdbService().fetchFilms(searchedFilm)
+    
+    const filmsData = await omdbService().fetchFilms(searchedFilm, 1)
 
     filmsDataDispatch(isLoadingFilmsData(false))
     filmsDataDispatch(fetchFilmsData(filmsData))

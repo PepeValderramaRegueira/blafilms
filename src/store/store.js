@@ -4,7 +4,9 @@ import filmsReducer from './reducer'
 const initialState = {
   Search: {},
   Response: "False",
-  isLoading: false
+  isLoading: false,
+  totalResults: '',
+  currentPage: 1
 }
 
 const FilmsContext = createContext(initialState)
