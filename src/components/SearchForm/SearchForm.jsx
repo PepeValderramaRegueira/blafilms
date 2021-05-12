@@ -22,6 +22,7 @@ const SearchForm = ({ fetchApi }) => {
         value={currentSearch}
         onChange={handleSearchedFilmChange}
         placeholder="Search..."
+        name="searched-film"
         disabled={isLoading}
       />
       <Button label='Search' disabled={isLoading} />

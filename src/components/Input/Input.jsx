@@ -1,3 +1,5 @@
+import propTypes from 'prop-types'
+
 const Input = ({
   placeholder,
   value,
@@ -17,6 +19,15 @@ const Input = ({
       className='input'
     />
   )
+}
+
+Input.propTypes = {
+  placeholder: propTypes.string,
+  value: propTypes.string.isRequired,
+  type: propTypes.oneOf(['text']),
+  name: propTypes.string.isRequired,
+  onChange: propTypes.func.isRequired,
+  disabled: propTypes.bool
 }
 
 export default Input
