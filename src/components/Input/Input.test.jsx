@@ -16,37 +16,37 @@ describe('Testing Input component', function() {
         <Input value="input value" name="testing-input" onChange={onChange}/>
       )
 
-      expect(screen.getByDisplayValue('input value')).toBeInTheDocument()
-      expect(screen.getByDisplayValue('input value')).toHaveProperty('name', 'testing-input')
+      expect(screen.getByRole('textbox')).toHaveProperty('value', 'input value')
+      expect(screen.getByRole('textbox')).toHaveProperty('name', 'testing-input')
     })
 
     test('type', function() {
-      const input = render(
+      render(
         <Input value="input value" name="testing-input" onChange={onChange} />
-      ).container.firstChild
+      )
 
-      expect(input).toHaveProperty('type', 'text')
+      expect(screen.getByRole('textbox')).toHaveProperty('type', 'text')
     })
 
     test('disabled = true', function() {
-      const input = render(
+      render(
         <Input
           value="input value"
           name="testing-input"
           onChange={onChange}
           disabled
         />
-      ).container.firstChild
+      )
 
-      expect(input).toHaveProperty('disabled', true)
+      expect(screen.getByRole('textbox')).toHaveProperty('disabled', true)
     })
 
     test('disabled = false', function() {
-      const input = render(
+      render(
         <Input value="input value" name="testing-input" onChange={onChange} />
-      ).container.firstChild
+      )
 
-      expect(input).toHaveProperty('disabled', false)
+      expect(screen.getByRole('textbox')).toHaveProperty('disabled', false)
     })
 
     test("When the value prop changes, should update it's value", function() {
@@ -56,7 +56,7 @@ describe('Testing Input component', function() {
 
       rerender(<Input value="changed value" name="testing-input" onChange={onChange}/>)
 
-      expect(screen.getByDisplayValue('changed value')).toBeInTheDocument()
+      expect(screen.getByRole('textbox')).toHaveAttribute('value', 'changed value')
     })
   })
 })
