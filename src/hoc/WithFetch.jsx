@@ -6,7 +6,7 @@ const withFetch = (ComponentWrapper) => ({...props}) => {
 	const { filmsData, filmsDataDispatch } = useContext(FilmsContext)
 	const { currentSearch } = filmsData
 	
-	const fetchApi = async (searchedFilmOld, page, pageAction) => {
+	const fetchApi = async (page, pageAction) => {
 		filmsDataDispatch(isLoadingFilmsData(true))
     
     const filmsData = await omdbService().fetchFilms(currentSearch, page)

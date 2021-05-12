@@ -10,7 +10,7 @@ const SearchForm = ({ fetchApi }) => {
   
   const handleSubmit = async (e) => {
     e.preventDefault()
-		fetchApi(currentSearch, 1, resetPage)
+		fetchApi(1, resetPage)
   }
 
 	const handleSearchedFilmChange = (e) => filmsDataDispatch(updateCurrentSearch(e.target.value))

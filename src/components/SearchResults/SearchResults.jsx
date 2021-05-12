@@ -19,12 +19,12 @@ const SearchResults = ({ fetchApi }) => {
   const totalPages = calculateTotalPages(totalResults)
   const { previousPage, nextPage } = getPagination(currentPage, totalPages)
 
-	const fetchNextFilms = (pageAction, page) => {
-		fetchApi('text', page, pageAction)
-	}
-
 	const prevPageIsDisabled = currentPage === 1
 	const nextPageIsDisabled = currentPage === totalPages
+
+  const fetchNextFilms = (pageAction, page) => {
+		fetchApi(page, pageAction)
+	}
   
   return (
     <div className="search-results">
