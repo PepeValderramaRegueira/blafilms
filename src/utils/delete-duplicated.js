@@ -5,6 +5,10 @@
  * @returns { Array } New array without duplicated items
  */
 function deleteDuplicated(itemsArray) {
+  if (!itemsArray) {
+    return []
+  }
+  
   return [
     ...new Set(itemsArray.map(JSON.stringify))
   ].map(JSON.parse)
