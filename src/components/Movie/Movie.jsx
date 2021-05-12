@@ -1,10 +1,11 @@
 import placeholderImg from './../../assets/images/placeholder.png'
+import propTypes from 'prop-types'
 
 const Movie = ({ movie }) => {
-  const { imdbID, Poster, Title, Type, Year } = movie;
+  const { Poster, Title, Type, Year } = movie;
   
   return (
-    <li key={`${imdbID}`}>
+    <li>
       <article className="search-item">
         <img
           src={Poster === 'N/A' ? placeholderImg : Poster}
@@ -19,4 +20,19 @@ const Movie = ({ movie }) => {
   )
 }
 
+const movieType = propTypes.shape({
+  imdbID: propTypes.string,
+  Poster: propTypes.string,
+  Title: propTypes.string,
+  Type: propTypes.string,
+  Year: propTypes.string
+})
+
+Movie.propTypes = {
+  movie: movieType
+}
+
 export default Movie
+export {
+  movieType
+}
